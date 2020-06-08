@@ -28,6 +28,14 @@ ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl))) + labs(x = "Cylinders", y
 ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl), y = 100 * (..count..) / sum(..count..))) + 
   labs(x = "Cylinders", y = "%")
 
+# Add percentage labels (create freq table first)
+dfTab <- as.data.frame(table(mtcars$cyl))
+colnames(dfTab)[1] <- "x"
+dfTab$perc <- as.character(100 * dfTab$Freq / sum(dfTab$Freq))
+ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl))) + labs(x = "Cylinders", y = "Counts") +
+  geom_text(data = dfTab, aes(x = x, y = Freq, label = perc), vjust = -0.5)
+
+
 # For 2 variables -> Stacked (by default)
 # colour
 ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl), colour = factor(gear))) + 
@@ -139,9 +147,9 @@ ggplot(data = mtcars) + geom_boxplot(aes(x = factor(cyl), y = mpg, fill = factor
 # by two grouping variables
 ggplot(data = mtcars) + geom_boxplot(aes(x = factor(cyl), y = mpg, fill = factor(cyl), col = factor(am))) + 
   labs(title = "Boxplot", x = "", fill = "Cylinders", y = "Miles per gallon", col = "Transmission")
-# multiple columns/variables of a dataframe (stack the dataframe)
+# multiple columns/variables of a dataframe (stack or melt the dataframe)
 ggplot(data = stack(mtcars[,-(3:4)]), aes(x = ind, y = values)) + geom_boxplot() + labs(title = "Boxplot of vars")
-
+ggplot(data = reshape2::melt(mtcars[,-(3:4)]), aes(x = variable, y = value)) + geom_boxplot() + labs(title = "Boxplot of vars")
 
 ### Violin Plot (x empty, put the variable in y) -----------------------------------
 ggplot(data = mtcars) + geom_violin(aes(x = "", y = mpg)) + labs(title = "Violin plot", x = "")
@@ -154,6 +162,15 @@ ggplot(data = mtcars) + geom_violin(aes(x = factor(cyl), y = mpg), trim = F) +
 # by groups with colors
 ggplot(data = mtcars) + geom_violin(aes(x = factor(cyl), y = mpg, fill = factor(cyl)), trim = F) + 
   labs(title = "Violin plot", x = "", fill = "Cylinders")
+# with points
+ggplot(data = mtcars) + geom_violin(aes(x = factor(cyl), y = mpg, fill = factor(cyl)), trim = F) + 
+  labs(title = "Violin plot", x = "", fill = "Cylinders") +
+  geom_point(aes(x = factor(cyl), y = mpg, fill = factor(cyl)))
+# with jitter
+ggplot(data = mtcars) + geom_violin(aes(x = factor(cyl), y = mpg, fill = factor(cyl)), trim = F) + 
+  labs(title = "Violin plot", x = "", fill = "Cylinders") +
+  geom_jitter(aes(x = factor(cyl), y = mpg, fill = factor(cyl)),
+              height = 0, width = 0.1)
 
 
 ### Dotplot ------------------------------------------------------------------------
