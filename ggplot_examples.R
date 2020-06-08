@@ -24,16 +24,25 @@ library(ggplot2)
 ### Barplot ("x" is a factor, "y" is not necessary unless we want percentages) -----
 ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl))) + labs(x = "Cylinders", y = "Counts")
 
-# With percentages
-ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl), y = 100 * (..count..) / sum(..count..))) + 
+# Percentages (group = 1)
+ggplot(data = mtcars) +
+  geom_bar(aes(x = factor(cyl), y = stat(prop), group = 1)) + 
   labs(x = "Cylinders", y = "%")
 
-# Add percentage labels (create freq table first)
-dfTab <- as.data.frame(table(mtcars$cyl))
-colnames(dfTab)[1] <- "x"
-dfTab$perc <- as.character(100 * dfTab$Freq / sum(dfTab$Freq))
-ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl))) + labs(x = "Cylinders", y = "Counts") +
-  geom_text(data = dfTab, aes(x = x, y = Freq, label = perc), vjust = -0.5)
+# Add count/proportion/percentage labels (stat = 'count')
+ggplot(data = mtcars, aes(x = factor(cyl), y = stat(count))) + 
+  geom_bar() + labs(x = "Cylinders", y = "Counts") +
+  geom_text(stat = 'count', aes(label = stat(count)), vjust = -0.2)
+
+ggplot(data = mtcars, aes(x = factor(cyl), y = stat(prop), group = 1)) + 
+  geom_bar() + labs(x = "Cylinders", y = "Proportion") +
+  geom_text(stat = 'count', vjust = -0.2,
+            aes(label = stat(prop), group = 1))
+
+ggplot(data = mtcars, aes(x = factor(cyl), y = 100*stat(prop), group = 1)) + 
+  geom_bar() + labs(x = "Cylinders", y = "%") +
+  geom_text(stat = 'count', vjust = -0.2,
+            aes(label = 100*stat(prop), group = 1))
 
 
 # For 2 variables -> Stacked (by default)
@@ -51,6 +60,12 @@ ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl), colour = factor(gear)), po
 # fill
 ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl), fill = factor(gear)), position = "dodge") + 
   labs(x = "Cylinders", y = "Counts", fill = "Gear")
+
+# Add count labels
+ggplot(data = mtcars, aes(x = factor(cyl), fill = factor(gear))) + geom_bar(position = "dodge") + 
+  labs(x = "Cylinders", y = "Counts", fill = "Gear") +
+  geom_text(stat = 'count', aes(label = stat(count)),
+            position = position_dodge(width = 0.9), vjust = -0.2)
 
 
 ### Pie chart (it is a "circular" barplot, leaving the variable x empty) -----------
