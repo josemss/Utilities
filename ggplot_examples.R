@@ -67,6 +67,13 @@ ggplot(data = mtcars, aes(x = factor(cyl), fill = factor(gear))) + geom_bar(posi
   geom_text(stat = 'count', aes(label = stat(count)),
             position = position_dodge(width = 0.9), vjust = -0.2)
 
+# Add percentage labels
+ggplot(data = mtcars, aes(x = factor(cyl), y = 100*(..prop..), fill = factor(gear))) +
+  geom_bar(position = "dodge", aes(group = factor(gear))) + 
+  labs(x = "Cylinders", y = "%", fill = "Gear") +
+  geom_text(stat = 'count', aes(label = round(100*stat(prop),2), group = factor(gear)),
+            position = position_dodge(width = 0.9), vjust = -0.2)
+
 
 ### Pie chart (it is a "circular" barplot, leaving the variable x empty) -----------
 ggplot(data = mtcars) + geom_bar(aes(x = "", fill = factor(cyl))) + coord_polar(theta = "y") + 
