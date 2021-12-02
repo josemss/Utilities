@@ -1,10 +1,10 @@
-##############################################
+#--------------------------------------------#
 #  Some graphics with the {ggplot2} package  #
 #      Author: Jose M. Sanchez-Santos        #
-##############################################
+#--------------------------------------------#
 
 
-# Install and load the package
+# Install and load the package ----
 if (!requireNamespace("ggplot2", quietly = TRUE))
   install.packages("ggplot2")
 library(ggplot2)
@@ -17,11 +17,11 @@ library(ggplot2)
 #   variables of the dataframe.
 
 
-#####################################
-#  Qualitative variables / factors  #
-#####################################
+#-----------------------------------#
+#  Qualitative variables / factors  # ----
+#-----------------------------------#
 
-### Barplot ("x" is a factor, "y" is not necessary unless we want percentages) -----
+## Barplot ("x" is a factor, "y" is not necessary unless we want percentages) ----
 ggplot(data = mtcars) + geom_bar(aes(x = factor(cyl))) + labs(x = "Cylinders", y = "Counts")
 
 # Percentages (group = 1)
@@ -75,7 +75,7 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = 100*(..prop..), fill = factor(gea
             position = position_dodge(width = 0.9), vjust = -0.2)
 
 
-### Pie chart (it is a "circular" barplot, leaving the variable x empty) -----------
+## Pie chart (it is a "circular" barplot, leaving the variable x empty) ----
 ggplot(data = mtcars) + geom_bar(aes(x = "", fill = factor(cyl))) + coord_polar(theta = "y") + 
   labs(x = "", y = "", fill = "Cylinders")
 
@@ -92,11 +92,11 @@ ggplot(data = dftemp, aes(x = "", y = Freq, fill = Cyl)) +
   # configure arguments of theme() to delete axis and ticks
 
 
-################################################
-#  Ordinal / Numeric / Quantitative Variables  #
-################################################
+#----------------------------------------------#
+#  Ordinal / Numeric / Quantitative Variables  # ----
+#----------------------------------------------#
 
-### Sequence (a single variable with respect to indices 1,2,3 ...) -----------------
+## Sequence (a single variable with respect to indices 1,2,3 ...) ----
 # points
 ggplot(data = mtcars) + geom_point(aes(seq_along(mpg), mpg))
 # points & lines
@@ -108,7 +108,7 @@ ggplot(data = mtcars, aes(x = seq_along(mpg))) + geom_line(aes(y = mpg, col = "m
   scale_colour_manual(values = c("red", "green"))
 
 
-### Histogram (function I() is to put colors as is) --------------------------------
+## Histogram (function I() is to put colors as is) ----
 ggplot(data = mtcars) + geom_histogram(aes(x = mpg), bins = 10, fill = I("white"), colour = I("black")) +
   labs(title = "Histogram", x = "Miles per gallon", y = "Counts")
 # with percentages
@@ -124,7 +124,7 @@ ggplot(data = mtcars, aes(x = mpg, fill = factor(am))) + geom_histogram(bins = 1
   labs(title = "Histograms", x = "Miles per gallon", y = "Counts", fill = "am")
 
 
-### Scatterplot --------------------------------------------------------------------
+## Scatterplot ----
 ggplot(data = mtcars) + geom_point(aes(x = mpg, y = wt), colour = I("red")) +
   labs(title = "Scatterplot", x = "Miles per gallon", y = "Weight")
 # by the scale of a variable
@@ -157,7 +157,7 @@ ggplot(data = mtcars) + geom_point(aes(x = mpg, y = wt, col = factor(cyl), shape
        shape = "Cylinders", col = "Cylinders")
 
 
-### Boxplot (variable goes inside aes(y = ...)) ------------------------------------
+## Boxplot (variable goes inside aes(y = ...)) ----
 ggplot(data = mtcars) + geom_boxplot(aes(y = mpg), width = 0.5) + labs(title = "Boxplot")
 
 # by groups (the grouping variable goes in aes(x = ...))
@@ -173,7 +173,7 @@ ggplot(data = mtcars) + geom_boxplot(aes(x = factor(cyl), y = mpg, fill = factor
 ggplot(data = stack(mtcars[,-(3:4)]), aes(x = ind, y = values)) + geom_boxplot() + labs(title = "Boxplot of vars")
 ggplot(data = reshape2::melt(mtcars[,-(3:4)]), aes(x = variable, y = value)) + geom_boxplot() + labs(title = "Boxplot of vars")
 
-### Violin Plot (x empty, put the variable in y) -----------------------------------
+## Violin Plot (x empty, put the variable in y) ----
 ggplot(data = mtcars) + geom_violin(aes(x = "", y = mpg)) + labs(title = "Violin plot", x = "")
 # not trimmed
 ggplot(data = mtcars) + geom_violin(aes(x = "", y = mpg), trim = F) + 
@@ -195,7 +195,7 @@ ggplot(data = mtcars) + geom_violin(aes(x = factor(cyl), y = mpg, fill = factor(
               height = 0, width = 0.1)
 
 
-### Dotplot ------------------------------------------------------------------------
+## Dotplot ----
 ggplot(data = mtcars) + geom_dotplot(aes(x = mpg)) + labs(title = "Dotplot", x = "Miles per gallon")
 # centered
 ggplot(data = mtcars) + geom_dotplot(aes(x = mpg), stackdir = "center", binwidth = 1.2) + 
@@ -216,7 +216,7 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) + geom_violin(aes(fill = fa
   labs(title = "Violin + Dotplot", x = "", y = "Miles per gallon", fill = "Cylinders")
 
 
-### Density plot -------------------------------------------------------------------
+## Density plot ----
 ggplot(data = mtcars) + geom_density(aes(x = mpg), fill = I("aquamarine2")) +
   labs(title = "Density", x = "Miles per gallon")
 # add transparency
@@ -236,7 +236,7 @@ ggplot(data = mtcars) + geom_density(aes(x = mpg, fill = factor(am), linetype = 
   scale_linetype_discrete(name = "Transmission", labels = c("Automatic", "Manual"))
 
 
-### Plot separated by factors (facet_grid() ----------------------------------------
+## Plot separated by factors (facet_grid() ----
 # with a formula factor1~factor2 
 ggplot(data = mtcars, aes(x = hp, y = mpg, shape = factor(am), colour = factor(am))) +
   facet_grid(gear ~ cyl) + geom_point() +
@@ -256,7 +256,7 @@ ggplot(data = mtcars, aes(x = hp, y = mpg, shape = factor(am), colour = factor(a
   facet_grid(vs + am ~ gear, margins = "vs") + geom_point()
 
 
-### Different plots in the same layout (grid.arrange() from {gridExtra} ) ----------
+# Different plots in the same layout (grid.arrange() from {gridExtra} ) ----
 if (!requireNamespace("gridExtra", quietly = TRUE))
   install.packages("gridExtra")
 library(gridExtra)
