@@ -3,7 +3,7 @@
 #-----------------------------------------------------------#
 
 ## {rio} package ----
-install.packages("rio", dependencies = T)
+if(!require('rio')) {install.packages("rio")}
 library(rio)
 
 
