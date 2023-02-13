@@ -4,5 +4,5 @@ A repository with scripts and more:
   - ggplot_examples.R -> graph examples with {ggplot2}
   - overview_statistical_tests.pdf -> What statistical test should I do?
   - Import_export_convert_data_files.R -> Script for importing, exporting and converting data files
-  - Colour_area_under_a_curve_ggplot2.R -> Colouring the area under a curve with {ggplot2} package
+  - Colour_area_under_a_curve_ggplot2.R -> Colouring the area under a curve with {ggplot2} package[link](https://raw.githubusercontent.com/josemss/Utilities/master/Colour_area_under_a_curve_ggplot2.R)
   - Generate_microarray_data.R -> Generating differentially expressed microarray data
