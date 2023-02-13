@@ -1,4 +1,4 @@
-# Utilities - A repository with scripts and more.
+# Utilities - R scripts and more.
 
 ## Data:
 
