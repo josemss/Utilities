@@ -17,3 +17,5 @@
 ## Statistic:
 
 -   What statistical test should I do?: [overview_statistical_tests.pdf](<https://github.com/josemss/Utilities/blob/master/overview_statistical_tests.pdf>)
+
+-   Sample size and error when estimating the mean of a population with unknown variance: [RPubs_josemss](https://rpubs.com/josemss/rpill_size_error)
