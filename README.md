@@ -8,6 +8,10 @@
 
 -   Generating differentially expressed microarray data: [Generate_microarray_data.R](<https://github.com/josemss/Utilities/blob/master/Generate_microarray_data.R>)
 
+-   Enter a vector or matrix in the R console using the keyboard: [RPubs_josemss](https://rpubs.com/josemss/rpill_keyboard)
+
+-   Install packages from BioConductor: [RPubs_josemss](https://rpubs.com/josemss/rpill_bioc)
+
 ## Plot:
 
 -   Colouring the area under a curve with {ggplot2} package: [Colour_area_under_a\_curve_ggplot2.R](<https://github.com/josemss/Utilities/blob/master/Colour_area_under_a_curve_ggplot2.R>)
@@ -17,3 +21,5 @@
 ## Statistic:
 
 -   What statistical test should I do?: [overview_statistical_tests.pdf](<https://github.com/josemss/Utilities/blob/master/overview_statistical_tests.pdf>)
+
+-   Sample size and error when estimating the mean of a population with unknown variance: [RPubs_josemss](https://rpubs.com/josemss/rpill_size_error)
