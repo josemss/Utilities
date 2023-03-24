@@ -20,6 +20,8 @@
 
 -   Function to test normality and plot density: [Function_Shapiro_Density.R](https://github.com/josemss/Utilities/blob/master/Function_Shapiro_Density.R "Function_Shapiro_Density.R") and [RPubs_josemss](https://rpubs.com/josemss/rpill_shapiro_density)
 
+-   Scatterplot with marginal plots: [RPubs_josemss](https://rpubs.com/josemss/rpill_marginal_plots)
+
 ## Statistic:
 
 -   What statistical test should I do?: [overview_statistical_tests.pdf](https://github.com/josemss/Utilities/blob/master/overview_statistical_tests.pdf)
